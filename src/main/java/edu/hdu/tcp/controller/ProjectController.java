@@ -19,5 +19,4 @@ public class ProjectController {
     public List<Project> selectAllProducts() {
         return this.projectService.selectAllProjects ();
     }
-
 }

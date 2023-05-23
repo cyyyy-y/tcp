@@ -14,7 +14,9 @@ public class ProjectService {
 
     /***查询所有项目*/
     public List<Project> selectAllProjects() {
-        return this.projectMapper.selectAllProjects ();
+        List<Project> projectList = this.projectMapper.selectAllProjects();
+        System.out.println(projectList.toString());
+        return projectList;
     }
 
 }
