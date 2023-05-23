@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.hdu.tcp.mapper.UsersMapper">
+    <resultMap id="BaseResultMap" type="edu.hdu.tcp.model.Users">
+        <id column="u_id" jdbcType="INTEGER" property="uId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+        <result column="head_img" jdbcType="VARCHAR" property="headImg" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        u_id, name, pwd, head_img
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from users
+        where u_id = #{uId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from users
+        where u_id = #{uId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="edu.hdu.tcp.model.Users">
+        insert into users (u_id, name, pwd,
+                           head_img)
+        values (#{uId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR},
+                #{headImg,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="edu.hdu.tcp.model.Users">
+        insert into users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uId != null">
+                u_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="pwd != null">
+                pwd,
+            </if>
+            <if test="headImg != null">
+                head_img,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uId != null">
+                #{uId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null">
+                #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="headImg != null">
+                #{headImg,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="edu.hdu.tcp.model.Users">
+        update users
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null">
+                pwd = #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="headImg != null">
+                head_img = #{headImg,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where u_id = #{uId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="edu.hdu.tcp.model.Users">
+        update users
+        set name = #{name,jdbcType=VARCHAR},
+            pwd = #{pwd,jdbcType=VARCHAR},
+            head_img = #{headImg,jdbcType=VARCHAR}
+        where u_id = #{uId,jdbcType=INTEGER}
+    </update>
+</mapper>
