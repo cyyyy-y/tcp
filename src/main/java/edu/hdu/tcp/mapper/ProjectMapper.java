@@ -10,4 +10,7 @@ import java.util.List;
 @Repository
 public interface ProjectMapper {
     public List<Project> selectAllProjects ();
+    public void insertProjects(Project project);
+    public void updateProject(Project project);
+    public void deleteProject(int id);
 }

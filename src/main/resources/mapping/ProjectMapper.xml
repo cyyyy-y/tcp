@@ -4,10 +4,40 @@
 <mapper namespace="edu.hdu.tcp.mapper.ProjectMapper">
 
 <!--	查询所有项目-->
-    <select id="selectAllProjects" resultType="edu.hdu.tcp.model.Project">
+    <select id="selectAllProjects" resultType="Project" >
 		select * from project
 	</select>
 
+<!--添加项目-->
+	<insert id="insertProjects" parameterType="Project">
+		insert into project(`name`,description,startDate,endDate,person) value(#{name},#{description},#{startDate},#{endDate},#{person})
+	</insert>
 
+<!--	编辑项目-->
+	<update id="updateProject" parameterType="Project">
+		update project
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="description != null">
+				description = #{description},
+			</if>
+			<if test="startDate != null">
+				startDate = #{startDate},
+			</if>
+			<if test="endDate != null">
+				endDate = #{endDate},
+			</if>
+			<if test="person != null">
+				person = #{person},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
 
+	<!--	删除项目-->
+	<delete id="deleteProject" parameterType="Integer">
+		delete from project where id=#{id}
+	</delete>
 </mapper>
